@@ -6,7 +6,6 @@
 //  Copyright © 2018年 hc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "CardModule.h"
 #import <React/RCTEventDispatcher.h>
 #import <AVFoundation/AVFoundation.h>
@@ -65,6 +64,53 @@ RCT_EXPORT_METHOD(alert:(NSString *)message){
     [self.class presentViewController:alertController animated:YES completion:nil];
 }
 
+RCT_EXPORT_METHOD(checkPermissionCamera: (RCTResponseSenderBlock)callback){
+    AVAuthorizationStatus authStatus =  [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    
+    NSMutableDictionary *output = [[NSMutableDictionary alloc] init];
+    
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
+        //无权限
+        [output setValue:@(FALSE) forKey:@"is_success"];
+    }else {
+        [output setValue:@(TRUE) forKey:@"is_success"];
+    }
+    callback(@[output]);
+}
+
+RCT_EXPORT_METHOD(checkPermissionMic: (RCTResponseSenderBlock)callback){
+    AVAuthorizationStatus authStatus =  [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    
+    NSMutableDictionary *output = [[NSMutableDictionary alloc] init];
+    
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
+        //无权限
+        [output setValue:@(FALSE) forKey:@"is_success"];
+    }else {
+        [output setValue:@(TRUE) forKey:@"is_success"];
+    }
+    callback(@[output]);
+}
+
+RCT_EXPORT_METHOD(openSettings:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if (@(UIApplicationOpenSettingsURLString != nil)) {
+        
+        NSNotificationCenter * __weak center = [NSNotificationCenter defaultCenter];
+        id __block token = [center addObserverForName:UIApplicationDidBecomeActiveNotification
+                                               object:nil
+                                                queue:nil
+                                           usingBlock:^(NSNotification *note) {
+                                               [center removeObserver:token];
+                                               resolve(@YES);
+                                           }];
+        
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
 
 
 @end

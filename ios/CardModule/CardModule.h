@@ -6,12 +6,6 @@
 //  Copyright © 2018年 hc. All rights reserved.
 //
 
-#ifndef CardModule_h
-#define CardModule_h
-
-
-
-#endif /* CardModule_h */
 
 #import <Foundation/Foundation.h>
 #import <React/RCTBridge.h>
