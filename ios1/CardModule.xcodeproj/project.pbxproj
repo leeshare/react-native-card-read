@@ -1,0 +1,172 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B8AE10C92120583900F33AD5 /* CardDialog.h in Sources */ = {isa = PBXBuildFile; fileRef = B8AE10A821204DEE00F33AD5 /* CardDialog.h */; };
+		B8AE10CA2120583900F33AD5 /* CardDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AE10A721204DED00F33AD5 /* CardDialog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B8AE109B2120494000F33AD5 /* CardModule.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = CardModule.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8AE10A5212049A700F33AD5 /* CardModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardModule.m; sourceTree = "<group>"; };
+		B8AE10A6212049C700F33AD5 /* CardModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardModule.h; sourceTree = "<group>"; };
+		B8AE10A721204DED00F33AD5 /* CardDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDialog.m; sourceTree = "<group>"; };
+		B8AE10A821204DEE00F33AD5 /* CardDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDialog.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		B8AE10942120494000F33AD5 = {
+			isa = PBXGroup;
+			children = (
+				B8AE109D2120494000F33AD5 /* CardModule */,
+				B8AE109C2120494000F33AD5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B8AE109C2120494000F33AD5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B8AE109B2120494000F33AD5 /* CardModule.metallib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B8AE109D2120494000F33AD5 /* CardModule */ = {
+			isa = PBXGroup;
+			children = (
+				B8AE10A821204DEE00F33AD5 /* CardDialog.h */,
+				B8AE10A721204DED00F33AD5 /* CardDialog.m */,
+				B8AE10A5212049A700F33AD5 /* CardModule.m */,
+				B8AE10A6212049C700F33AD5 /* CardModule.h */,
+			);
+			path = CardModule;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B8AE109A2120494000F33AD5 /* CardModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8AE10A22120494000F33AD5 /* Build configuration list for PBXNativeTarget "CardModule" */;
+			buildPhases = (
+				B8AE10992120494000F33AD5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CardModule;
+			productName = CardModule;
+			productReference = B8AE109B2120494000F33AD5 /* CardModule.metallib */;
+			productType = "com.apple.product-type.metal-library";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B8AE10952120494000F33AD5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = hc;
+				TargetAttributes = {
+					B8AE109A2120494000F33AD5 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = B8AE10982120494000F33AD5 /* Build configuration list for PBXProject "CardModule" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B8AE10942120494000F33AD5;
+			productRefGroup = B8AE109C2120494000F33AD5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B8AE109A2120494000F33AD5 /* CardModule */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B8AE10992120494000F33AD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8AE10C92120583900F33AD5 /* CardDialog.h in Sources */,
+				B8AE10CA2120583900F33AD5 /* CardDialog.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B8AE10A02120494000F33AD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B8AE10A12120494000F33AD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		B8AE10A32120494000F33AD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B8AE10A42120494000F33AD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B8AE10982120494000F33AD5 /* Build configuration list for PBXProject "CardModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8AE10A02120494000F33AD5 /* Debug */,
+				B8AE10A12120494000F33AD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8AE10A22120494000F33AD5 /* Build configuration list for PBXNativeTarget "CardModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8AE10A32120494000F33AD5 /* Debug */,
+				B8AE10A42120494000F33AD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B8AE10952120494000F33AD5 /* Project object */;
+}

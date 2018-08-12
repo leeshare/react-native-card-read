@@ -7,12 +7,27 @@
 		<key>SchoolearnModule.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>36</integer>
+		</dict>
+		<key>WaveformViewModule.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>8405E90E1EFE5D7D008C4FE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E839CE271B3EF54100115CBE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E839CE321B3EF54100115CBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

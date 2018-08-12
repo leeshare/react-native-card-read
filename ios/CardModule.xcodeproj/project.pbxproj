@@ -3,47 +3,64 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B8AE109F2120494000F33AD5 /* CardModule.metal in Sources */ = {isa = PBXBuildFile; fileRef = B8AE109E2120494000F33AD5 /* CardModule.metal */; };
+		8405E9181EFE5F1D008C4FE5 /* CardModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405E9171EFE5F1D008C4FE5 /* CardModule.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		845972F91F01C88600628E1E /* CardDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 845972F81F01C88600628E1E /* CardDialog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B8AE109B2120494000F33AD5 /* CardModule.metallib */ = {isa = PBXFileReference; explicitFileType = "archive.metal-library"; includeInIndex = 0; path = CardModule.metallib; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8AE109E2120494000F33AD5 /* CardModule.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CardModule.metal; sourceTree = "<group>"; };
-		B8AE10A5212049A700F33AD5 /* CardModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardModule.m; sourceTree = "<group>"; };
-		B8AE10A6212049C700F33AD5 /* CardModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardModule.h; sourceTree = "<group>"; };
-		B8AE10A721204DED00F33AD5 /* CardDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDialog.m; sourceTree = "<group>"; };
-		B8AE10A821204DEE00F33AD5 /* CardDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDialog.h; sourceTree = "<group>"; };
+		8405E90F1EFE5D7D008C4FE5 /* libCardModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCardModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8405E9161EFE5F1D008C4FE5 /* CardModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardModule.h; sourceTree = "<group>"; };
+		8405E9171EFE5F1D008C4FE5 /* CardModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardModule.m; sourceTree = "<group>"; };
+		845972F71F01C85800628E1E /* CardDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardDialog.h; sourceTree = "<group>"; };
+		845972F81F01C88600628E1E /* CardDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDialog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		8405E91A1EFE5FBA008C4FE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		B8AE10942120494000F33AD5 = {
+		BF53719229FD95876ABBE82A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B8AE109D2120494000F33AD5 /* CardModule */,
-				B8AE109C2120494000F33AD5 /* Products */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E839CE1F1B3EF54100115CBE = {
+			isa = PBXGroup;
+			children = (
+				E839CE2A1B3EF54100115CBE /* CardModule */,
+				E839CE291B3EF54100115CBE /* Products */,
+				BF53719229FD95876ABBE82A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		B8AE109C2120494000F33AD5 /* Products */ = {
+		E839CE291B3EF54100115CBE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B8AE109B2120494000F33AD5 /* CardModule.metallib */,
+				8405E90F1EFE5D7D008C4FE5 /* libCardModule.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B8AE109D2120494000F33AD5 /* CardModule */ = {
+		E839CE2A1B3EF54100115CBE /* CardModule */ = {
 			isa = PBXGroup;
 			children = (
-				B8AE10A821204DEE00F33AD5 /* CardDialog.h */,
-				B8AE10A721204DED00F33AD5 /* CardDialog.m */,
-				B8AE109E2120494000F33AD5 /* CardModule.metal */,
-				B8AE10A5212049A700F33AD5 /* CardModule.m */,
-				B8AE10A6212049C700F33AD5 /* CardModule.h */,
+				8405E9161EFE5F1D008C4FE5 /* CardModule.h */,
+				8405E9171EFE5F1D008C4FE5 /* CardModule.m */,
+				845972F71F01C85800628E1E /* CardDialog.h */,
+				845972F81F01C88600628E1E /* CardDialog.m */,
 			);
 			path = CardModule;
 			sourceTree = "<group>";
@@ -51,11 +68,12 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B8AE109A2120494000F33AD5 /* CardModule */ = {
+		8405E90E1EFE5D7D008C4FE5 /* CardModule */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8AE10A22120494000F33AD5 /* Build configuration list for PBXNativeTarget "CardModule" */;
+			buildConfigurationList = 8405E9151EFE5D7D008C4FE5 /* Build configuration list for PBXNativeTarget "CardModule" */;
 			buildPhases = (
-				B8AE10992120494000F33AD5 /* Sources */,
+				8405E90D1EFE5D7D008C4FE5 /* Sources */,
+				8405E91A1EFE5FBA008C4FE5 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -63,108 +81,232 @@
 			);
 			name = CardModule;
 			productName = CardModule;
-			productReference = B8AE109B2120494000F33AD5 /* CardModule.metallib */;
-			productType = "com.apple.product-type.metal-library";
+			productReference = 8405E90F1EFE5D7D008C4FE5 /* libCardModule.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B8AE10952120494000F33AD5 /* Project object */ = {
+		E839CE201B3EF54100115CBE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = hc;
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Erdem Başeğmez";
 				TargetAttributes = {
-					B8AE109A2120494000F33AD5 = {
-						CreatedOnToolsVersion = 9.4.1;
+					8405E90E1EFE5D7D008C4FE5 = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = B8AE10982120494000F33AD5 /* Build configuration list for PBXProject "CardModule" */;
-			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			buildConfigurationList = E839CE231B3EF54100115CBE /* Build configuration list for PBXProject "CardModule" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = B8AE10942120494000F33AD5;
-			productRefGroup = B8AE109C2120494000F33AD5 /* Products */;
+			mainGroup = E839CE1F1B3EF54100115CBE;
+			productRefGroup = E839CE291B3EF54100115CBE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B8AE109A2120494000F33AD5 /* CardModule */,
+				8405E90E1EFE5D7D008C4FE5 /* CardModule */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B8AE10992120494000F33AD5 /* Sources */ = {
+		8405E90D1EFE5D7D008C4FE5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8AE109F2120494000F33AD5 /* CardModule.metal in Sources */,
+				845972F91F01C88600628E1E /* CardDialog.m in Sources */,
+				8405E9181EFE5F1D008C4FE5 /* CardModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B8AE10A02120494000F33AD5 /* Debug */ = {
+		8405E9131EFE5D7D008C4FE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				SDKROOT = iphoneos;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/node_modules/react-native/React",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		B8AE10A12120494000F33AD5 /* Release */ = {
+		8405E9141EFE5D7D008C4FE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/node_modules/react-native/React",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		B8AE10A32120494000F33AD5 /* Debug */ = {
+		E839CE3A1B3EF54100115CBE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../react-native/React",
+					"$(SRCROOT)/node_modules/react-native/React",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		B8AE10A42120494000F33AD5 /* Release */ = {
+		E839CE3B1B3EF54100115CBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../react-native/React",
+					"$(SRCROOT)/node_modules/react-native/React",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B8AE10982120494000F33AD5 /* Build configuration list for PBXProject "CardModule" */ = {
+		8405E9151EFE5D7D008C4FE5 /* Build configuration list for PBXNativeTarget "CardModule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B8AE10A02120494000F33AD5 /* Debug */,
-				B8AE10A12120494000F33AD5 /* Release */,
+				8405E9131EFE5D7D008C4FE5 /* Debug */,
+				8405E9141EFE5D7D008C4FE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8AE10A22120494000F33AD5 /* Build configuration list for PBXNativeTarget "CardModule" */ = {
+		E839CE231B3EF54100115CBE /* Build configuration list for PBXProject "CardModule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B8AE10A32120494000F33AD5 /* Debug */,
-				B8AE10A42120494000F33AD5 /* Release */,
+				E839CE3A1B3EF54100115CBE /* Debug */,
+				E839CE3B1B3EF54100115CBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B8AE10952120494000F33AD5 /* Project object */;
+	rootObject = E839CE201B3EF54100115CBE /* Project object */;
 }
