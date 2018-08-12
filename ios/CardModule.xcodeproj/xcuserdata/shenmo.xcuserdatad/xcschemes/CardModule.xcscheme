@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8405E90E1EFE5D7D008C4FE5"
-               BuildableName = "libSchoolearnModule.a"
-               BlueprintName = "SchoolearnModule"
-               ReferencedContainer = "container:SchoolearnModule.xcodeproj">
+               BuildableName = "libCardModule.a"
+               BlueprintName = "CardModule"
+               ReferencedContainer = "container:CardModule.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8405E90E1EFE5D7D008C4FE5"
-            BuildableName = "libSchoolearnModule.a"
-            BlueprintName = "SchoolearnModule"
-            ReferencedContainer = "container:SchoolearnModule.xcodeproj">
+            BuildableName = "libCardModule.a"
+            BlueprintName = "CardModule"
+            ReferencedContainer = "container:CardModule.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8405E90E1EFE5D7D008C4FE5"
-            BuildableName = "libSchoolearnModule.a"
-            BlueprintName = "SchoolearnModule"
-            ReferencedContainer = "container:SchoolearnModule.xcodeproj">
+            BuildableName = "libCardModule.a"
+            BlueprintName = "CardModule"
+            ReferencedContainer = "container:CardModule.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
