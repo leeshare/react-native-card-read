@@ -12,6 +12,7 @@
 #import <React/RCTBridgeModule.h>
 #import <UIKit/UIKit.h>
 #import <STIDCardReader/STIDCardReader.h>
+#import <STIDCardReader/STMyPeripheral.h>
 
 //#define ERROR
 #define UDValue(key) [[NSUserDefaults standardUserDefaults]objectForKey:key]
@@ -23,6 +24,8 @@
 @interface CardModule : NSObject <RCTBridgeModule> {
     NSString * lb_begintime;
     NSString * lb_endtime;
+    int successrcount;
+    int failcount;
 }
 - (NSString *)getTimeNow;
 
