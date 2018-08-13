@@ -11,7 +11,19 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBridgeModule.h>
 #import <UIKit/UIKit.h>
+#import <STIDCardReader/STIDCardReader.h>
 
-@interface CardModule : NSObject <RCTBridgeModule>
+//#define ERROR
+#define UDValue(key) [[NSUserDefaults standardUserDefaults]objectForKey:key]
+#define SETUDValue(value,key) [[NSUserDefaults standardUserDefaults] setObject:value forKey:key]
+
+#define SERVER @"SERVERIP"  //@"192.168.1.10"//@"222.134.70.138" //
+#define PORT @"SERVERPORT" //10002//8088 //
+
+@interface CardModule : NSObject <RCTBridgeModule> {
+    NSString * lb_begintime;
+    NSString * lb_endtime;
+}
+- (NSString *)getTimeNow;
 
 @end
