@@ -1,6 +1,7 @@
 import {
 	Platform,
-	NativeModules
+	NativeModules,
+	NativeAppEventEmitter
 } from 'react-native';
 
 //module.exports = NativeModules.CardModule;
