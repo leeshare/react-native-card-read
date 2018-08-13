@@ -20,10 +20,13 @@ export default {
 		CardModule.show_peripher_list(opt);
 		this.listener && this.listener.remove();
     this.listener = NativeAppEventEmitter.addListener('confirmEvent', event => {
-      fnConf[event['type']](event['peripherResult']);
+      fnConf[event['type']](event['peripherResult'], event['peripherType']);
     });
 	},
 	connect_peripher(options){
 		CardModule.connect_peripher(options);
+	},
+	read_card_info(options){
+		CardModule.read_card_info(options);
 	}
 }
