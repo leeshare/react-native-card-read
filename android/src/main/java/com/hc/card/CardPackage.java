@@ -1,4 +1,4 @@
-package com.lixl.schoolearn;
+package com.hc.card;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -11,17 +11,17 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by lixl on 17/5/17.
+ * Created by admin on 18/8/10.
  */
 
-public class SchoolearnPackage implements ReactPackage {
+public class CardPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new SchoolearnModule(reactContext));
+        return Arrays.<NativeModule>asList(new CardModule(reactContext));
     }
 
-    @Override
+    //@Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return  Collections.emptyList();
     }

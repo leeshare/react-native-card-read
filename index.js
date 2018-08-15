@@ -9,7 +9,7 @@ import {
 let CardModule = NativeModules.CardModule;
 
 export default {
-	init_peripher_list(options){
+	init(options){
 		let opt = {
 		    onReturn(){},
 			...options
@@ -17,11 +17,14 @@ export default {
 		let fnConf = {
 			confirm: opt.onReturn,
 		};
-		CardModule.show_peripher_list(opt);
+		CardModule.init(opt);
 		this.listener && this.listener.remove();
     this.listener = NativeAppEventEmitter.addListener('confirmEvent', event => {
       fnConf[event['type']](event['peripherResult'], event['peripherType']);
     });
+	},
+	show_peripher_list(options){
+		CardModule.show_peripher_list(options);
 	},
 	connect_peripher(options){
 		CardModule.connect_peripher(options);

@@ -52,26 +52,32 @@ RCT_EXPORT_MODULE();
 //3 蓝牙读卡
 //4 获取到的图片信息 得到。
 
-//1 获取并返回一个设备列表
-RCT_EXPORT_METHOD(show_peripher_list: (NSDictionary *)options){
-    
-    //[[STIDCardReader instance] setDelegate:self];
+//0 初始化
+RCT_EXPORT_METHOD(init: (NSDictionary *)options){
     successrcount = 0;
     failcount = 0;
-    
-    //_callback = callback;
-    //NSMutableDictionary *output = [[NSMutableDictionary alloc] init];
-
     /**
      *  <#Description#>
      */
     //if(UDValue(SERVER)== nil){
-        SETUDValue(@"senter-online.cn", SERVER);
+    SETUDValue(@"senter-online.cn", SERVER);
     //}
-
+    
     //if(UDValue(PORT) == nil){
-        SETUDValue(@"10002", PORT);
+    SETUDValue(@"10002", PORT);
     //}
+}
+
+//1 获取并返回一个设备列表
+RCT_EXPORT_METHOD(show_peripher_list: (NSDictionary *)options){
+    
+    //[[STIDCardReader instance] setDelegate:self];
+    
+    
+    //_callback = callback;
+    //NSMutableDictionary *output = [[NSMutableDictionary alloc] init];
+
+    
     scaleManager = [STIDCardReader instance];
     scaleManager.delegate = (id)self;
     [scaleManager setServerIp:UDValue(SERVER) andPort:[UDValue(PORT) intValue]];
