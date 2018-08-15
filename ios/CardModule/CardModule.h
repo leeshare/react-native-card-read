@@ -11,7 +11,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBridgeModule.h>
 #import <UIKit/UIKit.h>
-#import <STIDCardReader/STIDCardReader.h>
+//#import <STIDCardReader/STIDCardReader.h>
 #import <STIDCardReader/STMyPeripheral.h>
 
 //#define ERROR
@@ -26,7 +26,12 @@
     NSString * lb_endtime;
     int successrcount;
     int failcount;
+    Boolean isStartRead;
 }
 - (NSString *)getTimeNow;
+
+-(void) startScareCard;
+-(void) disconnectCurrentPeripher:(STMyPeripheral *)peripheral;
+-(void) dealyReadCard;
 
 @end

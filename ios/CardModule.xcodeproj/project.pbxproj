@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8405E9181EFE5F1D008C4FE5 /* CardModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8405E9171EFE5F1D008C4FE5 /* CardModule.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		845972F91F01C88600628E1E /* CardDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 845972F81F01C88600628E1E /* CardDialog.m */; };
 		B8C2F1F82120FBC800292DA0 /* STIDCardReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8C2F1F72120FBC800292DA0 /* STIDCardReader.framework */; };
 		B8C2F1FD2121052D00292DA0 /* BlueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2F1FC2121052D00292DA0 /* BlueManager.m */; };
 		B8C2F23E2121227F00292DA0 /* STIDCardReader in Frameworks */ = {isa = PBXBuildFile; fileRef = B8C2F23D2121227E00292DA0 /* STIDCardReader */; };
@@ -18,8 +17,6 @@
 		8405E90F1EFE5D7D008C4FE5 /* libCardModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCardModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8405E9161EFE5F1D008C4FE5 /* CardModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardModule.h; sourceTree = "<group>"; };
 		8405E9171EFE5F1D008C4FE5 /* CardModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardModule.m; sourceTree = "<group>"; };
-		845972F71F01C85800628E1E /* CardDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardDialog.h; sourceTree = "<group>"; };
-		845972F81F01C88600628E1E /* CardDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDialog.m; sourceTree = "<group>"; };
 		B8C2F1F72120FBC800292DA0 /* STIDCardReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = STIDCardReader.framework; sourceTree = "<group>"; };
 		B8C2F1F92120FBEF00292DA0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		B8C2F1FA2120FC0000292DA0 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
@@ -76,8 +73,6 @@
 				B8C2F1FC2121052D00292DA0 /* BlueManager.m */,
 				8405E9161EFE5F1D008C4FE5 /* CardModule.h */,
 				8405E9171EFE5F1D008C4FE5 /* CardModule.m */,
-				845972F71F01C85800628E1E /* CardDialog.h */,
-				845972F81F01C88600628E1E /* CardDialog.m */,
 			);
 			path = CardModule;
 			sourceTree = "<group>";
@@ -138,7 +133,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845972F91F01C88600628E1E /* CardDialog.m in Sources */,
 				B8C2F1FD2121052D00292DA0 /* BlueManager.m in Sources */,
 				8405E9181EFE5F1D008C4FE5 /* CardModule.m in Sources */,
 			);

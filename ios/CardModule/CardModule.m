@@ -13,29 +13,23 @@
 
 #import <objc/runtime.h>
 
-#import "CardDialog.h"
-
 //蓝牙扫描
 //#import "BlueToothViewController.h"
 #import <STIDCardReader/STIDCardReader.h>
 #import "BlueManager.h"
 #import <STIDCardReader/STMyPeripheral.h>
 
-#pragma mark - const values
 
-#pragma mark -
-
+#define DDEBUG
 @interface CardModule (){
     NSTimer *_timer; //定时器
     NSInteger countDown;  //倒计时
 
-    STIDCardReader *scaleManager;
-    NSMutableArray *deviceList;
+    STIDCardReader *scaleManager;       //蓝牙扫描函数
+    NSMutableArray *deviceList;     //蓝牙列表
 }
 
-@property(nonatomic,strong)CardDialog *pick;
-
-
+@property CBCentralManager *cm;
 @end
 
 
@@ -56,6 +50,8 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(init: (NSDictionary *)options){
     successrcount = 0;
     failcount = 0;
+    [[STIDCardReader instance] setDelegate:self];
+    
     /**
      *  <#Description#>
      */
@@ -66,6 +62,9 @@ RCT_EXPORT_METHOD(init: (NSDictionary *)options){
     //if(UDValue(PORT) == nil){
     SETUDValue(@"10002", PORT);
     //}
+    scaleManager = [STIDCardReader instance];
+    scaleManager.delegate = (id)self;
+    [scaleManager setServerIp:UDValue(SERVER) andPort:[UDValue(PORT) intValue]];
 }
 
 //1 获取并返回一个设备列表
@@ -77,18 +76,10 @@ RCT_EXPORT_METHOD(show_peripher_list: (NSDictionary *)options){
     //_callback = callback;
     //NSMutableDictionary *output = [[NSMutableDictionary alloc] init];
 
-    
-    scaleManager = [STIDCardReader instance];
-    scaleManager.delegate = (id)self;
-    [scaleManager setServerIp:UDValue(SERVER) andPort:[UDValue(PORT) intValue]];
-
-    //[self setRightNavbarHide:NO];
-    //[self setRightNavbarImage:nil withTitle:@"扫描" withImageLeft:NO];
 
     BlueManager *manager = [BlueManager instance];
     manager.deleagte = (id)self;
     [manager startScan];
-
 }
 
 //2 点击某一个设备进行 蓝牙连接
@@ -97,6 +88,7 @@ RCT_EXPORT_METHOD(connect_peripher: (NSDictionary *)options){
     if ([options count] != 0) {
         peripherMac = options[@"mac"];
     }
+    isStartRead = false;
     
     STMyPeripheral * peripher;
     if([deviceList count] > 0){
@@ -123,28 +115,10 @@ RCT_EXPORT_METHOD(connect_peripher: (NSDictionary *)options){
 
 //3 蓝牙读卡
 RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
-    [[STIDCardReader instance] setDelegate:self];
-    
-    BlueManager *bmanager = [BlueManager instance];
-    bmanager.deleagte = (id)self;
-    if(bmanager.linkedPeripheral == nil){
-        //[lb_error setText:@"请先选中要连接的蓝牙设备!"];
-        //[progressView stopAnimating];
-        
-        NSString *msg = @"请先选中要连接的蓝牙设备!";
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alert show];
-    }else{
-        if(bmanager.linkedPeripheral.peripheral.state != CBPeripheralStateConnected){
-            NSLog(@"蓝牙处于未连接状态,先连接蓝牙!");
-            [[BlueManager instance] connectPeripher:bmanager.linkedPeripheral];
-        }else{
-            NSLog(@"蓝牙处在连接状态,直接进行读卡的操作!");
-            [[STIDCardReader instance] setDelegate:(id)self];
-            [[STIDCardReader instance] startScaleCard];
-        }
-    }
+    isStartRead = true;
+    [self startScareCard];
 }
+
 
 //------------------------------------------
 #pragma mark BlueManagerDelegate
@@ -224,7 +198,13 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
         NSString *msg = [NSString stringWithFormat:@"已连接上 %@,开始时间 %@,结束时间 %@",peripheral.advName,lb_begintime,lb_endtime];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         
-        [alert show];
+//        if(isStartRead){
+            [[STIDCardReader instance] setDelegate:(id)self];
+            [[STIDCardReader instance] setLisentPeripheral:peripheral];
+            [[STIDCardReader instance] startScaleCard];
+//        }else {
+//            [alert show];
+//        }
         
         type = @"2";
         result = [[peripheral.advName stringByAppendingString:@"H-C"] stringByAppendingString:peripheral.mac];
@@ -252,6 +232,7 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
         NSString *errMsg = [NSString stringWithFormat:@"错误代码:%ld,错误信息:%@!", (long)[error code], [error localizedDescription]];
         
         //[lb_error setText:errMsg];
+        NSLog(errMsg);
         
         NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
         [dic setValue:@"confirm" forKey:@"type"];
@@ -262,6 +243,7 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
 
 - (void)successBack:(STMyPeripheral *)peripheral withData:(id)data{
     
+    id result;
     if(data && [data isKindOfClass:[NSDictionary class]]){
         
         //--新增 flag == 49 说明是外国人永久居住身份证
@@ -302,7 +284,6 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
         }
         
         
-        
         //[lb_etime setText:[self getTimeNow]];
         
         NSString *date = [NSString stringWithFormat:@"%@-%@",[data objectForKey:@"EffectedDate"],[data objectForKey:@"ExpiredDate"]];
@@ -312,9 +293,13 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
         NSString *devnum = [[STIDCardReader instance] getSerialNumber];
         NSLog(@"获取到的设备的序列号: %@",devnum);
         
+        result = data;
+        
     }else if (data &&[data isKindOfClass:[NSData class]]){
         
         UIImage *img = [UIImage imageWithData:data];
+        
+        NSString *imageBase64Str = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
         
         //[headerView setImage:img];
         //[progressView stopAnimating];
@@ -326,16 +311,51 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
         //----照片解析出来之后，发送断开蓝牙的指令，如果想要保持长连接，可以不关闭蓝牙连接----
         [self disconnectCurrentPeripher:peripheral];
         
+        result = imageBase64Str;
     }
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:@"confirm" forKey:@"type"];
-    [dic setValue:@"3" forKey:@"peripherType"];
-    [dic setValue:data forKey:@"peripherResult"];
+    [dic setValue:@"30" forKey:@"peripherType"];
+    [dic setValue:result forKey:@"peripherResult"];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.bridge.eventDispatcher sendAppEventWithName:@"confirmEvent" body:dic];
     });
     
+}
+
+-(void)startScareCard{
+    BlueManager *bmanager = [BlueManager instance];
+    bmanager.deleagte = (id)self;
+    if(bmanager.linkedPeripheral == nil){
+        //[lb_error setText:@"请先选中要连接的蓝牙设备!"];
+        //[progressView stopAnimating];
+        
+        NSString *msg = @"请先选中要连接的蓝牙设备!";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }else{
+        if(bmanager.linkedPeripheral.peripheral.state != CBPeripheralStateConnected){
+            NSLog(@"蓝牙处于未连接状态,先连接蓝牙!");
+            [[BlueManager instance] connectPeripher:bmanager.linkedPeripheral];
+        }else{
+            NSLog(@"蓝牙处在连接状态,直接进行读卡的操作!");
+            [[STIDCardReader instance] setDelegate:(id)self];
+            [[STIDCardReader instance] startScaleCard];
+        }
+    }
+    
+}
+
+//--MainVewi中断开蓝牙的连接，在读卡成功或者失败的时候都要执行断开的操作
+-(void) disconnectCurrentPeripher:(STMyPeripheral *)peripheral{
+    NSLog(@"MainView进入断开蓝牙的操作!");
+    if(peripheral.peripheral.state == CBPeripheralStateConnected){
+        NSLog(@"蓝牙处于连接状态,需要关闭!");
+        BlueManager *bmanager = [BlueManager instance];
+        bmanager.deleagte = (id)self;
+        [bmanager disConnectPeripher:peripheral];
+    }
 }
 
 -(void) dealyReadCard{
@@ -357,6 +377,7 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
 
 //------------------------------------------
 
+/*
 //测试用  弹出 对话框
 RCT_EXPORT_METHOD(alert:(NSString *)message){
     //alert
@@ -432,6 +453,6 @@ RCT_EXPORT_METHOD(openSettings:(RCTPromiseResolveBlock)resolve rejecter:(RCTProm
         [[UIApplication sharedApplication] openURL:url];
     }
 }
-
+*/
 
 @end
