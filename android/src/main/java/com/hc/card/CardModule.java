@@ -624,7 +624,7 @@ public class CardModule extends ReactContextBaseJavaModule{
 
                 int progress_value = (Integer) msg.obj;
 
-				alert("正在读卡......进度" + progress_value );//,进度：+ progress_value + "%"
+				//alert("正在读卡......进度" + progress_value );//,进度：+ progress_value + "%"
 				break;
 
 			case ConsantHelper.READ_CARD_START:
@@ -632,23 +632,21 @@ public class CardModule extends ReactContextBaseJavaModule{
 				break;
 			case Error.ERR_CONNECT_SUCCESS:
 				String devname = (String) msg.obj;
-				alert(devname+"连接成功!" );
-				//mtv_info1.setText("成功:" + String.format("%d", totalcount) + " 失败:" + String.format("%d", failecount));
+				//alert(devname+"连接成功!" );
 				break;
 			case Error.ERR_CONNECT_FAILD:
 				String devname1 = (String) msg.obj;
-				alert(devname1+"连接失败!" );
-				//mtv_info1.setText("成功:" + String.format("%d", totalcount) + " 失败:" + String.format("%d", failecount));
+				//alert(devname1+"连接失败!" );
 				break;
 			case Error.ERR_CLOSE_SUCCESS:
-				alert((String) msg.obj+"断开连接成功");
+				//alert((String) msg.obj+"断开连接成功");
 				break;
 			case Error.ERR_CLOSE_FAILD:
-				alert((String) msg.obj+"断开连接失败");
+				//alert((String) msg.obj+"断开连接失败");
 				break;
 			case Error.RC_SUCCESS:
 				String devname12 = (String) msg.obj;
-				alert(devname12+"连接成功!");
+				//alert(devname12+"连接成功!");
 				break;
 
 			}
