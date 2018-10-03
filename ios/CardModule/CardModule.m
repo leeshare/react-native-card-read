@@ -129,7 +129,10 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
     }
     if(deviceList != nil){
         if([deviceList count] == 0){
-            [deviceList addObject:periperal];
+            if(periperal.advName == nil || [periperal.advName isEqualToString:@""] || periperal.mac == nil || [periperal.mac isEqualToString:@""]){
+            }else {
+                [deviceList addObject:periperal];
+            }
             //[self.table reloadData];
         }else{
             BOOL isexit = NO;
@@ -143,7 +146,10 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
                 }
             }
             if(!isexit){
-                [deviceList addObject:periperal];
+                if(periperal.advName == nil || [periperal.advName isEqualToString:@""] || periperal.mac == nil || [periperal.mac isEqualToString:@""]){
+                }else{
+                    [deviceList addObject:periperal];
+                }
                 //[self.table reloadData];
             }
         }
@@ -165,8 +171,12 @@ RCT_EXPORT_METHOD(read_card_info: (NSDictionary *)options){
     for (int i = 0; i < deviceList.count; i++)
     {
         STMyPeripheral * peripher = [deviceList objectAtIndex:i];
-        strs = [[[strs stringByAppendingString:peripher.advName] stringByAppendingString:@"H-C"] stringByAppendingString:peripher.mac];
-        strs = [strs stringByAppendingString:@"H,C"];
+        if(peripher.advName == nil || [peripher.advName isEqualToString:@""] || peripher.mac == nil || [peripher.mac isEqualToString:@""]){
+            
+        }else {
+            strs = [[[strs stringByAppendingString:peripher.advName] stringByAppendingString:@"H-C"] stringByAppendingString:peripher.mac];
+            strs = [strs stringByAppendingString:@"H,C"];
+        }
     }
 
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
