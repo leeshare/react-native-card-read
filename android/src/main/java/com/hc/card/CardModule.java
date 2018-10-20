@@ -92,7 +92,7 @@ import cn.com.senter.model.IdentityCardZ;
 
 public class CardModule extends ReactContextBaseJavaModule{
 
-    Activity activity;
+    static Activity activity;
     private Context mContext;
 
     private static final String CONFIRM_EVENT_NAME = "confirmEvent";
@@ -113,14 +113,14 @@ public class CardModule extends ReactContextBaseJavaModule{
 	int successcount = 0;
 	int failedcount = 0;
 
-	private String server_address = "";
-	private int server_port = 0;
+	private static String server_address = "";
+	private static int server_port = 0;
 
 	public static Handler uiHandler;
 
-	private NFCReaderHelper mNFCReaderHelper;
-	private OTGReaderHelper mOTGReaderHelper;
-	private BlueReaderHelper mBlueReaderHelper;
+	private static NFCReaderHelper mNFCReaderHelper;
+	private static OTGReaderHelper mOTGReaderHelper;
+	private static BlueReaderHelper mBlueReaderHelper;
 
     private AsyncTask<Void, Void, String> nfcTask = null;
 
@@ -128,7 +128,7 @@ public class CardModule extends ReactContextBaseJavaModule{
     private BluetoothAdapter mBluetoothAdapter = null;			///蓝牙适配器
 
     private int iselectNowtype = 1;
-    private String Blueaddress = null;
+    private static String Blueaddress = null;
     private boolean bSelServer = false;
 
     private int totalcount;
@@ -146,6 +146,44 @@ public class CardModule extends ReactContextBaseJavaModule{
 	private NfcAdapter nfcAdapter;
 
 	//------------------------
+
+	//---------------- system
+
+	private static final int REQUEST_CONNECT_DEVICE = 1;
+	public static String EXTRA_DEVICE_ADDRESS = "device_address";
+
+	public static void setBlueAddress(int requestCode, int resultCode, Intent data){
+		switch (requestCode)
+			 {
+			 	case REQUEST_CONNECT_DEVICE:
+				 if (resultCode == Activity.RESULT_OK)
+				 {
+
+					 Blueaddress = data.getExtras().getString(EXTRA_DEVICE_ADDRESS);
+					 if (!Blueaddress.matches("([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])"))
+					 {
+			    		return;
+					 }
+
+					ShareReferenceSaver.saveData(activity, BLUE_ADDRESSKEY, Blueaddress);
+
+				 }
+				 break;
+			 	case 2:
+			 		if (resultCode == 100){
+
+						 server_address =  data.getExtras().getString("address");
+				 		 server_port = data.getExtras().getInt("port");
+
+				 		 initShareReference();
+
+				 		//bSelServer = false;
+					 }
+			 		break;
+			 }
+	}
+
+	//----------------
 
 
     public CardModule(ReactApplicationContext reactContext){
@@ -168,6 +206,7 @@ public class CardModule extends ReactContextBaseJavaModule{
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 
         mBlueReaderHelper = new BlueReaderHelper(activity, uiHandler);
+		mOTGReaderHelper = new OTGReaderHelper(activity, uiHandler);
 
 		Blueaddress = ShareReferenceSaver.getData(activity, BLUE_ADDRESSKEY);
         initShareReference();
@@ -230,7 +269,7 @@ public class CardModule extends ReactContextBaseJavaModule{
 			if (!Blueaddress.matches("([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])"))
 			{
 				//tv_info.setText("address:" + Blueaddress + " is wrong, length = " + Blueaddress.length());
-				alert("name:" + name + "[address:" + Blueaddress + "] is wrong, length = " + Blueaddress.length());
+				//alert("name:" + name + "[address:" + Blueaddress + "] is wrong, length = " + Blueaddress.length());
 			    return;
 			}
 			ShareReferenceSaver.saveData(activity, BLUE_ADDRESSKEY, Blueaddress);
@@ -250,6 +289,12 @@ public class CardModule extends ReactContextBaseJavaModule{
 
         //commonEvent(EVENT_KEY_CONFIRM, 3);
     }
+
+    //4 otg读卡
+    @ReactMethod
+    public void read_card_info_otg(ReadableMap options){
+        readCardOTG();
+	}
 
 
 
@@ -354,30 +399,30 @@ public class CardModule extends ReactContextBaseJavaModule{
 
     //--------------------------------------------
 
-	private void initShareReference() {
+	private static void initShareReference() {
 
-		if ( this.server_address.length() <= 0){
+		if ( server_address.length() <= 0){
 			if (ShareReferenceSaver.getData(activity, SERVER_KEY1).trim().length() <= 0) {
-				 this.server_address = "senter-online.cn";//
+				 server_address = "senter-online.cn";//
 			} else {
-				this.server_address = ShareReferenceSaver.getData(activity, SERVER_KEY1);
+				server_address = ShareReferenceSaver.getData(activity, SERVER_KEY1);
 			}
 			if (ShareReferenceSaver.getData(activity, PORT_KEY1).trim().length() <= 0) {
-				this.server_port = 10002;
+				server_port = 10002;
 			} else {
-				this.server_port = Integer.valueOf(ShareReferenceSaver.getData(activity, PORT_KEY1));
+				server_port = Integer.valueOf(ShareReferenceSaver.getData(activity, PORT_KEY1));
 			}
 		}
 
 		//mNFCReaderHelper.setServerAddress(this.server_address);
 		//mNFCReaderHelper.setServerPort(this.server_port);
 
-		//mOTGReaderHelper.setServerAddress(this.server_address);
-		//mOTGReaderHelper.setServerPort(this.server_port);
+		mOTGReaderHelper.setServerAddress(server_address);
+		mOTGReaderHelper.setServerPort(server_port);
 
 		//----实例化help类---
-		mBlueReaderHelper.setServerAddress(this.server_address);
-		mBlueReaderHelper.setServerPort(this.server_port);
+		mBlueReaderHelper.setServerAddress(server_address);
+		mBlueReaderHelper.setServerPort(server_port);
 
 	}
 
@@ -480,6 +525,87 @@ public class CardModule extends ReactContextBaseJavaModule{
 			Toast.makeText(activity, "请确认蓝牙设备已经连接，再读卡!", Toast.LENGTH_LONG).show();
 		}
 	}
+
+
+	protected void readCardOTG() {
+		if (isNFC){
+			mNFCReaderHelper.disable();
+			isNFC = false;
+		}
+
+		boolean bRet = mOTGReaderHelper.registerOTGCard();
+		if (bRet == true) {
+			new OTGReadTask()
+					.executeOnExecutor(Executors.newCachedThreadPool());
+
+		}
+	}
+
+	private class OTGReadTask extends AsyncTask<Void, Void, String> {
+
+		@Override
+		protected void onPostExecute(String strCardInfo) {
+			if (TextUtils.isEmpty(strCardInfo)) {
+				uiHandler.sendEmptyMessage(ConsantHelper.READ_CARD_FAILED);
+				//ButtondefDrawable();
+				failecount++;
+				nfcTask = null;
+				return;
+			}
+
+			if (strCardInfo.length() <=2){
+				readCardFailed(strCardInfo);
+				//ButtondefDrawable();
+				nfcTask = null;
+				failecount++;
+				return;
+			}
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			IdentityCardZ mIdentityCardZ = new IdentityCardZ();
+
+			try {
+				mIdentityCardZ = (IdentityCardZ) objectMapper.readValue(
+						strCardInfo, IdentityCardZ.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+				nfcTask = null;
+				return;
+			}
+
+			totalcount++;
+			readCardSuccess(mIdentityCardZ);
+
+			 try {
+
+			 Bitmap bm = BitmapFactory.decodeByteArray(mIdentityCardZ.avatar,
+			 0, mIdentityCardZ.avatar.length);
+			 DisplayMetrics dm = new DisplayMetrics();
+			 //getWindowManager().getDefaultDisplay().getMetrics(dm);
+			activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+			 //photoView.setMinimumHeight(dm.heightPixels);
+			 //photoView.setMinimumWidth(dm.widthPixels);
+			 //photoView.setImageBitmap(bm);
+			 } catch (Exception e) {
+			 }
+
+			 //ButtondefDrawable();
+			 nfcTask = null;
+//			 mtv_info1.setText("成功:" + String.format("%d", totalcount) + " 失败:" + String.format("%d", failecount));
+
+			super.onPostExecute(strCardInfo);
+//			readCardOTG();
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			String strCardInfo = mOTGReaderHelper.Read();
+			return strCardInfo;
+		}
+
+	};
+
 
 	private String strCardInfo = "";
 	private int readErrorCode = 0;
@@ -604,7 +730,7 @@ public class CardModule extends ReactContextBaseJavaModule{
 
 			switch (msg.what) {
 			case ConsantHelper.READ_CARD_SUCCESS:
-			    alert("READ_CARD_SUCCESS");
+			    //alert("READ_CARD_SUCCESS");
 
 				break;
 
@@ -617,7 +743,7 @@ public class CardModule extends ReactContextBaseJavaModule{
 				break;
 
 			case ConsantHelper.READ_CARD_WARNING:
-				alert("请移动卡片在合适位置!");
+				//alert("请移动卡片在合适位置!");
 				break;
 
 			case ConsantHelper.READ_CARD_PROGRESS:
@@ -628,7 +754,7 @@ public class CardModule extends ReactContextBaseJavaModule{
 				break;
 
 			case ConsantHelper.READ_CARD_START:
-				alert("正在读卡......");
+				//alert("正在读卡......");
 				break;
 			case Error.ERR_CONNECT_SUCCESS:
 				String devname = (String) msg.obj;
